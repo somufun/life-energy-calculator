@@ -32,9 +32,9 @@
 </head>
 <body>
     <h1>How much time do I have to work to buy this!</h1>
-    <p>Find out how much time you're trading for the thing you want to buy.</p>
+    <p>Find out how much of your life you're trading for the thing you want to buy.</p>
 
-    <label for="netIncome">Monthly Net Income - After Tax $s($):</label>
+    <label for="netIncome">Monthly Net Income - After Tax ($):</label>
     <input type="number" id="netIncome" placeholder="e.g. 5000">
 
     <label for="workingHours">Working Hours per Month:</label>
@@ -43,7 +43,7 @@
     <label for="expense">Expense Amount ($):</label>
     <input type="number" id="expense" placeholder="e.g. 200">
 
-    <button onclick="calculate()">Calculate How Much I need to work to earn this!</button>
+    <button onclick="calculate()">Calculate How Much I Need to Work!</button>
 
     <div class="result" id="result"></div>
 
@@ -56,13 +56,14 @@
             if (netIncome > 0 && workingHours > 0 && expense >= 0) {
                 const hourlyRate = netIncome / workingHours;
                 const lifeEnergyHours = expense / hourlyRate;
-                const workWeeksPerMonth = 4; // assuming 4 weeks/month
+                const workWeeksPerMonth = 4;
                 const hoursPerWeek = workingHours / workWeeksPerMonth;
-                const percentOfWeeklyWork = (lifeEnergyHours / hoursPerWeek) * 100;
+                const workWeeksNeeded = lifeEnergyHours / hoursPerWeek;
 
                 document.getElementById("result").innerHTML = 
-                    `That expense costs you approximately <strong>${lifeEnergyHours.toFixed(2)}</strong> hours of your life.<br>
-                    That’s about <strong>${percentOfWeeklyWork.toFixed(1)}%</strong> of a standard work week.`;
+                    `That expense costs you approximately <strong>${lifeEnergyHours.toFixed(2)}</strong> working hours of your life.<br>
+                    This means you'd have to work for <strong>${workWeeksNeeded.toFixed(2)}</strong> full work weeks to earn this.<br>
+                    <em>Make sure it’s worth it.</em>`;
             } else {
                 document.getElementById("result").innerHTML = "Please fill in all fields correctly.";
             }
